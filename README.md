@@ -15,8 +15,11 @@ This repository contains a single-cell RNA-sequencing (scRNA-seq) analysis of **
 
 ### 1. Quality Control & Normalization
 
-- Removed low-quality cells and low-expression genes.
-- Identified **highly variable genes** using gene dispersion metrics.
+- Removed low-quality cells and genes with low expression using threshold-based filtering.
+- Retained genes that showed sufficient dispersion across cells to focus on biologically informative signals.
+- Performed **library size normalization** to correct for differences in sequencing depth across cells.
+- Applied **log-transformation** to stabilize variance and make gene expression values more comparable.
+- Identified **highly variable genes** to be used in downstream dimensionality reduction and clustering.
 
 ### 2. Dimensionality Reduction (PCA)
 
