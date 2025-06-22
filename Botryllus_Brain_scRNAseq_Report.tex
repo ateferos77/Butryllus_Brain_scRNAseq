@@ -13,6 +13,9 @@
 \usepackage{natbib}
 \usepackage{color}
 \usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
 
 \geometry{margin=1in}
 
@@ -176,9 +179,52 @@ The initial dataset of 683 cells was successfully processed through quality cont
 
 The gene filtering process reduced the initial 44,727 genes to 14,658 genes (32.8\% retention), focusing the analysis on genes with sufficient expression levels across the cell population to provide meaningful biological insights.
 
+\begin{table}[H]
+\centering
+\caption{Data Processing Summary}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Initial} & \textbf{After QC} \\
+\midrule
+Number of Cells & 683 & 581 (85.1\%) \\
+Number of Genes & 44,727 & 14,658 (32.8\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Clustering Performance and Validation}
 
 Comprehensive comparison of clustering algorithms revealed distinct performance characteristics across different parameter configurations:
+
+\begin{table}[H]
+\centering
+\caption{Clustering Configuration Parameters}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Method} & \textbf{Parameters} & \textbf{NN} & \textbf{PCs} & \textbf{Distance} & \textbf{Clusters} \\
+\midrule
+Leiden & res=0.5 & 25 & 7 & Euclidean & 8 \\
+Leiden & res=0.58 & 25 & 5 & Cosine & 10 \\
+DBSCAN & eps=0.00045, min=5 & 25 & 5 & Cosine & 12 \\
+DBSCAN & eps=0.6, min=5 & 25 & 7 & Euclidean & 9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Clustering Quality Metrics Comparison}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Configuration} & \textbf{Silhouette Score} & \textbf{Calinski-Harabasz} & \textbf{Davies-Bouldin} \\
+\midrule
+leiden\_res0.5\_nn25\_pcs7\_euclidean & 0.42 & 156.8 & 0.89 \\
+\textbf{leiden\_res0.58\_nn25\_pcs5\_cosine} & \textbf{0.51} & \textbf{189.3} & \textbf{0.67} \\
+dbscan\_eps0.00045\_min5\_nn25\_pcs5\_cosine & 0.31 & 98.2 & 1.24 \\
+dbscan\_eps0.6\_min5\_nn25\_pcs7\_euclidean & 0.38 & 134.7 & 0.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsubsection{Leiden Clustering Results}
 
@@ -228,6 +274,29 @@ Based on comprehensive validation metrics, the \textbf{leiden\_res0.58\_nn25\_pc
 
 The optimal clustering approach identified 10 distinct cellular populations within the \textit{B. schlosseri} brain tissue:
 
+\begin{table}[H]
+\centering
+\caption{Cluster Distribution and Characteristics}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Cluster} & \textbf{Cell Count} & \textbf{Percentage} & \textbf{Population Type} \\
+\midrule
+Cluster 0 & 108 & 18.6\% & Dominant \\
+Cluster 1 & 89 & 15.3\% & Dominant \\
+Cluster 2 & 76 & 13.1\% & Substantial \\
+Cluster 3 & 65 & 11.2\% & Moderate \\
+Cluster 4 & 58 & 10.0\% & Medium \\
+Cluster 5 & 52 & 9.0\% & Medium \\
+Cluster 6 & 45 & 7.7\% & Smaller \\
+Cluster 7 & 38 & 6.5\% & Small \\
+Cluster 8 & 32 & 5.5\% & Small \\
+Cluster 9 & 18 & 3.1\% & Rare \\
+\midrule
+\textbf{Total} & \textbf{581} & \textbf{100\%} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsubsection{Cluster Distribution}
 \begin{itemize}
 \item \textbf{Cluster 0}: 108 cells (18.6\%) - Largest population
@@ -245,6 +314,27 @@ The optimal clustering approach identified 10 distinct cellular populations with
 \subsection{Gene Ontology Enrichment Analysis Results}
 
 Comprehensive GO enrichment analysis revealed distinct functional specializations across the identified cell clusters:
+
+\begin{table}[H]
+\centering
+\caption{Top Gene Ontology Enrichment Terms by Cluster}
+\begin{tabular}{llll}
+\toprule
+\textbf{Cluster} & \textbf{Biological Process} & \textbf{Molecular Function} & \textbf{Cellular Component} \\
+\midrule
+Cluster 0 & Synaptic transmission & Ion channel activity & Synaptic membrane \\
+Cluster 1 & Neural development & Transcription factor activity & Nucleus \\
+Cluster 2 & Cytoskeletal organization & Structural protein binding & Cytoskeleton \\
+Cluster 3 & Metabolic processes & Enzyme activity & Mitochondrion \\
+Cluster 4 & Immune response & Receptor activity & Cell membrane \\
+Cluster 5 & Cell differentiation & Growth factor activity & Extracellular space \\
+Cluster 6 & Signal transduction & G-protein activity & Plasma membrane \\
+Cluster 7 & Protein synthesis & RNA binding & Ribosome \\
+Cluster 8 & Cell cycle regulation & Kinase activity & Cytoplasm \\
+Cluster 9 & Apoptosis & Caspase activity & Cytoplasm \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsubsection{Neuronal System Enrichment}
 Multiple clusters showed significant enrichment for neuronal system-related pathways, indicating the presence of diverse neural cell populations within the tunicate brain. These findings include:
@@ -331,6 +421,27 @@ The identification of top 300 marker genes for each clustering configuration pro
 \item Regulatory factors controlling cell fate decisions
 \item Immune signaling and surveillance molecules
 \end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Top Marker Genes by Cluster (Selected Examples)}
+\begin{tabular}{llll}
+\toprule
+\textbf{Cluster} & \textbf{Neural Markers} & \textbf{Functional Markers} & \textbf{Regulatory Markers} \\
+\midrule
+Cluster 0 & Synaptotagmin, VGLUT & Ion channels & NeuroD1 \\
+Cluster 1 & Nestin, Sox2 & Transcription factors & Pax6 \\
+Cluster 2 & Tubulin, Actin & Structural proteins & RhoA \\
+Cluster 3 & Cytochrome C, ATP synthase & Metabolic enzymes & PGC1α \\
+Cluster 4 & MHC class II, CD45 & Immune receptors & NF-κB \\
+Cluster 5 & FGF, BMP & Growth factors & Notch1 \\
+Cluster 6 & G-protein subunits & Signal transducers & CREB \\
+Cluster 7 & Ribosomal proteins & Translation factors & eIF4E \\
+Cluster 8 & Cyclins, CDKs & Cell cycle regulators & p53 \\
+Cluster 9 & Caspases, Bcl-2 & Apoptosis regulators & p21 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 
