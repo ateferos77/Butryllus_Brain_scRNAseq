@@ -183,16 +183,16 @@ After comprehensive evaluation, our champion clustering method revealed **10 dis
 ┌─────────────┬──────────────┬─────────────┐
 │   Cluster   │    Cells     │ Percentage  │
 ├─────────────┼──────────────┼─────────────┤
-│ Cluster 0   │    108       │   18.6%     │ 🏢 Metropolis
-│ Cluster 1   │     91       │   15.3%     │ 🏘️ Suburb
-│ Cluster 2   │     87       │   13.1%     │ 🏬 Commercial
-│ Cluster 3   │     73       │   11.2%     │ 🎭 Arts District
-│ Cluster 4   │     58       │   10.0%     │ 🏭 Industrial
-│ Cluster 5   │     55       │    9.0%     │ 🎓 University
-│ Cluster 6   │     38       │    7.7%     │ 🌳 Park Area
-│ Cluster 7   │     28       │    6.5%     │ 🏛️ Historic
-│ Cluster 8   │     25       │    5.5%     │ 🔬 Research
-│ Cluster 9   │     18       │    3.1%     │ 💎 Boutique
+│ Cluster 0   │    108       │   18.6%     │ 
+│ Cluster 1   │     91       │   15.3%     │ 
+│ Cluster 2   │     87       │   13.1%     │ 
+│ Cluster 3   │     73       │   11.2%     │ 
+│ Cluster 4   │     58       │   10.0%     │ 
+│ Cluster 5   │     55       │    9.0%     │ 
+│ Cluster 6   │     38       │    7.7%     │ 
+│ Cluster 7   │     28       │    6.5%     │ 
+│ Cluster 8   │     25       │    5.5%     │ 
+│ Cluster 9   │     18       │    3.1%     │ 
 └─────────────┴──────────────┴─────────────┘
 ```
 
